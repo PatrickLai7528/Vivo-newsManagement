@@ -11,7 +11,7 @@ public class Worker {
 	//要求进行工作人员初始化，当年龄小于18或工资低于2000时，进行异常提示，提示内容参阅测试用例
 	public Worker(String name, int age, int salary, String department) {
 		if(age<18 || salary<2000){
-			throw new IllegalArgumentException("Worker create error");
+			throw new IllegalArgumentException("Overtime illegal!");
 		}
 		else{
 			this.name=name;
