@@ -8,9 +8,17 @@ public class Worker {
 	public Worker() {
 
 	}
-	//è¦æ?‚è?›è?Œå·¥ä½œäºº??˜å?å?‹å?–ï?Œå?“å¹´é¾„å?ä??18??–å·¥èµ„ä?ä??2000?—¶ï¼Œè?›è?Œå?‚å¸¸??ç¤ºï¼Œæ?ç¤º??…å®¹??‚é?…æ?‹è?•ç”¨ä¾?
+	//è¦æ±‚è¿›è¡Œå·¥ä½œäººå‘˜åˆå§‹åŒ–ï¼Œå½“å¹´é¾„å°äº18æˆ–å·¥èµ„ä½äº2000æ—¶ï¼Œè¿›è¡Œå¼‚å¸¸æç¤ºï¼Œæç¤ºå†…å®¹å‚é˜…æµ‹è¯•ç”¨ä¾‹
 	public Worker(String name, int age, int salary, String department) {
-		
+		if(age<18 || salary<2000){
+			throw new IllegalArgumentException("Worker create error");
+		}
+		else{
+			this.name=name;
+			this.age=age;
+			this.salary=salary;
+			this.department=department;
+		}
 	}
 
 	public String getName() {
@@ -45,8 +53,13 @@ public class Worker {
 		this.department = department;
 	}
 	
-	//å±•ç¤º??˜å·¥??„åŸº?œ¬ä¿¡æ¯
+	//å±•ç¤ºå‘˜å·¥çš„åŸºæœ¬ä¿¡æ¯
 	public String show() {
-		return null;
+		return "My name is " + name + " ; age : " + age + " ; salary : " + salary + " ; department : " + department + ".";		//maybe wrong
 	}
+	
+	/*public static void main(String[] args) throws Exception {
+		Worker worker=new Worker("jim",20,20,"Programmer");
+		System.out.println(worker.show());
+	}*/
 }

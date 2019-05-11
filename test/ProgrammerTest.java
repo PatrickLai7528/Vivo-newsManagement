@@ -12,7 +12,6 @@ public class ProgrammerTest {
 	@Test(timeout=4000)
 	public void test1() {
 		Programmer p = new Programmer("p",21,8000,"Java","UI");
-		System.out.println(p.show());
 		assertEquals("My name is p ; age : 21 ; language : Java ; salary : 8000.",p.show());
 	}
 	

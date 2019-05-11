@@ -1,4 +1,6 @@
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.regex.Pattern;
 
 public class Programmer extends Worker {
 	public String language;
@@ -48,9 +50,14 @@ public class Programmer extends Worker {
 
 	private String getBonus(int overtime, int bonusPerEach, int max,
 			double radio) {
+		if(overtime > max) throw new IllegalArgumentException("Overtime illegal!");
 		int overBonus = Math.min(overtime * bonusPerEach, max);
 		double salary = this.salary * radio;
-		DecimalFormat df = new DecimalFormat("0.00");
+		DecimalFormat df = new DecimalFormat("0,000.00");
+//		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+//		symbols.setDecimalSeparator(',');
+//		symbols.setGroupingSeparator(' ');
+//		df.setDecimalFormatSymbols(symbols);
 		return df.format(overBonus + salary);
 	}
 
@@ -100,7 +107,51 @@ public class Programmer extends Worker {
 	 * @param comment
 	 */
 	public String hideUserinfo(String comment) {
-		return comment;
+		if (comment.contains("@")) {
+			return this.hideUserEmail(comment);
+		} else {
+			return this.hideUserPhone(comment);
+		}
+	}
+
+	private String hideUserEmail(String email) {
+		String[] spilted = email.split("@");
+
+		// @前 的長度必須大於 @後 的長度
+		if (spilted[0].length() <= 2
+				|| spilted[0].length() <= spilted[1].length())
+			return "illegal";
+
+		String pattern1 = "/[A-Z]|[a-z]|[0-9]+/g";
+		if (!Pattern.matches(pattern1, spilted[0]))
+			return "illegal";
+
+		String pattern2 = "/([A-Z]\\.|[a-z]\\.)*([A-Z]|[a-z]*){1}/g";
+		if (!Pattern.matches(pattern2, email))
+			return "illegal";
+
+		// 轉換成小寫
+		spilted[0] = spilted[0].toLowerCase();
+		spilted[1] = spilted[1].toLowerCase();
+
+		return spilted[0].charAt(0) + "*****"
+				+ spilted[0].charAt(spilted[0].length() - 1) + "@"
+				+ spilted[1].toLowerCase();
+
+	}
+
+	private String hideUserPhone(String phone) {
+		if (phone.length() > 10) {
+			String stars = "";
+			for (int i = 10; i < phone.length(); i++) {
+				stars += "*";
+			}
+			return "+" + stars + "-***-***-"
+					+ phone.substring(phone.length() - 4, phone.length());
+		} else {
+			return "***-***-"
+					+ phone.substring(phone.length() - 4, phone.length());
+		}
 	}
 
 }

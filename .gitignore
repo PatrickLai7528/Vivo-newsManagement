@@ -13,3 +13,7 @@ out/test/Vivo-newsManagement/EditorTest.class
 out/test/Vivo-newsManagement/ManagerTest.class
 out/test/Vivo-newsManagement/ProgrammerTest.class
 Vivo-newsManagement.iml
+bin/Programmer.class
+bin/ProgrammerTest.class
+bin/Worker.class
+*.class
