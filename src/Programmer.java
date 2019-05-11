@@ -1,5 +1,4 @@
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.regex.Pattern;
 
 public class Programmer extends Worker {

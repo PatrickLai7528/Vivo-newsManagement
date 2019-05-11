@@ -8,12 +8,12 @@ public class Manager extends Worker {
 	public Manager() {
 
 	}
-	//Managerç±»ç?„å?å?‹å??
+	//Managerç±»çš„åˆå§‹åŒ–
 	public Manager(String name, int age, int salary, String department) {
 			super(name,age,salary,department);
 	}
 
-	// ç®¡ç?†äºº??˜å¯ä»¥æŸ¥è¯¢æœ¬?ƒ¨?—¨??˜å·¥??„åŸº?œ¬ä¿¡æ¯ï¼Œè·¨?ƒ¨?—¨?Ÿ¥è¯¢æ?ç¤º??ƒé?ä?è¶³ï¼Œæ?ç¤º?œAccess Denied!??
+	// ç®¡ç†äººå‘˜å¯ä»¥æŸ¥è¯¢æœ¬éƒ¨é—¨å‘˜å·¥çš„åŸºæœ¬ä¿¡æ¯ï¼Œè·¨éƒ¨é—¨æŸ¥è¯¢æç¤ºæƒé™ä¸è¶³ï¼Œæç¤ºâ€œAccess Denied!â€
 	public String inquire(Worker e) {
 		String  Workerdepartment = e.getDepartment();
 		if(Workerdepartment.equals(this.department)==false){
@@ -25,7 +25,7 @@ public class Manager extends Worker {
 
 	}
 
-	// ç®¡ç?†äºº??˜ç?™è‡ªå·±ç?„é?Ÿä?æ·»?? å·¥ä½œäºº??˜ï?Œå?Œä??ƒ¨?—¨??„å·¥ä½œäºº??˜å¯ä»¥æ·»?? ï?Œå¹¶è¿”å?trueï¼Œä?å?Œéƒ¨?—¨??„å·¥ä½œäºº??˜æ? æ?•æ·»?? ï?Œè?”å?false
+	// ç®¡ç†äººå‘˜ç»™è‡ªå·±çš„é˜Ÿä¼æ·»åŠ å·¥ä½œäººå‘˜ï¼ŒåŒä¸€éƒ¨é—¨çš„å·¥ä½œäººå‘˜å¯ä»¥æ·»åŠ ï¼Œå¹¶è¿”å›trueï¼Œä¸åŒéƒ¨é—¨çš„å·¥ä½œäººå‘˜æ— æ³•æ·»åŠ ï¼Œè¿”å›false
 	public boolean lead(Worker e) {
 		String Workerdepartment = e.getDepartment();
 		if(Workerdepartment.equals(this.department)==false){
@@ -37,7 +37,7 @@ public class Manager extends Worker {
 		}
 	}
 
-	// ??“å°?‡ªå·±é?Ÿä?ç?„äºº??˜å?“å?ï?Œæ²¡??‰æ?“å°?œEmpty??
+	// æ‰“å°è‡ªå·±é˜Ÿä¼çš„äººå‘˜å§“åï¼Œæ²¡æœ‰æ‰“å°â€œEmptyâ€
 	public String print() {
 		if(worker.isEmpty()) {
 			System.out.println("Empty");

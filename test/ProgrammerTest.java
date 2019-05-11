@@ -16,13 +16,13 @@ public class ProgrammerTest {
 	}
 	
 	@Test(timeout=4000)
-	public void test2() throws Exception {
+	public void test2() {
 		Programmer p = new Programmer("p",21,8000,"Java","UI");
 		assertEquals("2,250.00",p.getBonus(5));
 	}
 
 	@Test(timeout=4000)
-	public void test3() throws Exception {
+	public void test3() {
 		Programmer p = new Programmer("p",21,8000,"Java","UI");
 		thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Overtime illegal!");
