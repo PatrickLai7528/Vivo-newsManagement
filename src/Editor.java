@@ -1,6 +1,14 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+
+import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 public class Editor extends Worker {
 
@@ -45,8 +53,46 @@ public class Editor extends Worker {
 	 * @param newsList
 	 */
 	public ArrayList<String> newsSort(ArrayList<String> newsList) {
-		return newsList;
+		try {
+			newsList.sort(new Comparator<String>() {
+				@Override
+				public int compare(String o1, String o2) {
+					try {
+						String pinyin1 = toPinyin(o1.charAt(0));
+						String pinyin2 = toPinyin(o2.charAt(0));
+						return pinyin1.compareTo(pinyin2);
+					} catch (Exception ex) {
+						ex.printStackTrace();
+						throw new IllegalStateException();
+					}
+				}
+			});
+			return newsList;
+		} catch (Exception e) {
+			throw new IllegalStateException();
+		}
 
+	}
+
+	//
+	// public static void main(String[] args) {
+	// Editor editor = new Editor();
+	// ArrayList<String> newsList = new ArrayList<String>();
+	// newsList.add("我是谁");
+	// newsList.add("谁是我");
+	// newsList.add("我是我");
+	// System.out.println(editor.newsSort(newsList));
+	// }
+
+	private String toPinyin(Character word)
+			throws BadHanyuPinyinOutputFormatCombination {
+		System.out.println(word);
+		// 1.创建一个格式化输出对象
+		HanyuPinyinOutputFormat outputF = new HanyuPinyinOutputFormat();
+		// 2.设置好格式
+		outputF.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+		outputF.setCaseType(HanyuPinyinCaseType.LOWERCASE);
+		return PinyinHelper.toHanyuPinyinStringArray(word, outputF)[0];
 	}
 
 	/**
