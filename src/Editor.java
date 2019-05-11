@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -154,7 +155,30 @@ public class Editor extends Worker {
 	 * @param title2
 	 */
 	public double minDistance(String title1, String title2) {
-		return 0;
+		int maxLength = Math.max(title1.length(), title2.length());
+		int minDis = minDistanceInt(title1, title2);
+		System.out.println(minDis);
+		DecimalFormat df = new DecimalFormat("0.00");
+		// return Double.parseDouble(df.format(100 * (1 - minDis
+		// / Math.max(title1.length(), title2.length()))));
+		System.out.println(maxLength);
+		double result = (1 - ((double) minDis / maxLength)) * 100;
+		return Double.parseDouble(df.format(result));
+	}
 
+	private int minDistanceInt(String title1, String title2) {
+		if (title2.isEmpty() || title1.isEmpty()) {
+			return Math.abs(title1.length() - title2.length());
+		}
+
+		if (title1.charAt(0) == title2.charAt(0)) {
+			return minDistanceInt(title1.substring(1), title2.substring(1));
+		}
+
+		int insert = 1 + minDistanceInt(title1, title2.substring(1));
+		int delete = 1 + minDistanceInt(title1.substring(1), title2);
+		int replace = 1 + minDistanceInt(title1.substring(1),
+				title2.substring(1));
+		return Math.min(insert, Math.min(delete, replace));
 	}
 }

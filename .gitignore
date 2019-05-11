@@ -33,3 +33,4 @@ bin/ProgrammerTest.class
 src.backup/Accountant.java
 src.backup/Editor.java
 src.backup/Programmer.java
+*.class
