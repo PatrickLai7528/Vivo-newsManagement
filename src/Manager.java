@@ -15,13 +15,14 @@ public class Manager extends Worker {
 
 	// 管理人员可以查询本部门员工的基本信息，跨部门查询提示权限不足，提示“Access Denied!”
 	public String inquire(Worker e) {
-		String Workerdepartment = e.getDepartment();
+		String  Workerdepartment = e.getDepartment();
 		if(Workerdepartment.equals(this.department)==false){
 			return ("Access Denied!");
 		}
 		else{
 			return super.show();
 		}
+
 	}
 
 	// 管理人员给自己的队伍添加工作人员，同一部门的工作人员可以添加，并返回true，不同部门的工作人员无法添加，返回false

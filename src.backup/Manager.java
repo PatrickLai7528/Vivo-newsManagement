@@ -15,13 +15,14 @@ public class Manager extends Worker {
 
 	// ç®¡ç?†äºº??˜å¯ä»¥æŸ¥è¯¢æœ¬?ƒ¨?—¨??˜å·¥??„åŸº?œ¬ä¿¡æ¯ï¼Œè·¨?ƒ¨?—¨?Ÿ¥è¯¢æ?ç¤º??ƒé?ä?è¶³ï¼Œæ?ç¤º?œAccess Denied!??
 	public String inquire(Worker e) {
-		String Workerdepartment = e.getDepartment();
+		String  Workerdepartment = e.getDepartment();
 		if(Workerdepartment.equals(this.department)==false){
 			return ("Access Denied!");
 		}
 		else{
 			return super.show();
 		}
+
 	}
 
 	// ç®¡ç?†äºº??˜ç?™è‡ªå·±ç?„é?Ÿä?æ·»?? å·¥ä½œäºº??˜ï?Œå?Œä??ƒ¨?—¨??„å·¥ä½œäºº??˜å¯ä»¥æ·»?? ï?Œå¹¶è¿”å?trueï¼Œä?å?Œéƒ¨?—¨??„å·¥ä½œäºº??˜æ? æ?•æ·»?? ï?Œè?”å?false
