@@ -40,3 +40,7 @@ bin/ProgrammerTest.class
 src.backup/Accountant.java
 src.backup/Editor.java
 src.backup/Programmer.java
+bin/Editor.class
+bin/Worker.class
+src/Editor.java
+src/Worker.java
