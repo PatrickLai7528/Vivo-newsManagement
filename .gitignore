@@ -41,3 +41,15 @@ src.backup/Accountant.java
 src.backup/Editor.java
 src.backup/Programmer.java
 *.class
+bin/Editor.class
+bin/Manager.class
+bin/ProgrammerTest.class
+bin/Worker.class
+mooctest/junitResult.json
+mooctest/mooctest1557566191880_junit.json
+mooctest/mooctest1557566270892_junit.json
+mooctest/mooctest1557566823127_junit.json
+sonar-project.properties
+src.backup/Editor.java
+src.backup/Manager.java
+src.backup/Worker.java
