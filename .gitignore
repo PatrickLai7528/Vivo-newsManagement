@@ -1,4 +1,11 @@
-
+*.class
+.classpath
+bin/*.class
+bin/Worker.class
+src/Manager.java
+src/Worker.java
+*.class
+bin/Manager.class
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml

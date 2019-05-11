@@ -1,10 +1,10 @@
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.regex.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
@@ -19,8 +19,90 @@ public class Editor extends Worker {
 
 	// 初始化Editor
 	public Editor(String name, int age, int salary) {
-
+		super(name,age,salary,"Editor");
 	}
+
+	
+	static boolean isPunctuation(char ch){  
+        if(isCjkPunc(ch)) return true;  
+        if(isEnPunc(ch)) return true;  
+          
+        if(0x2018 <= ch && ch <= 0x201F) return true;     
+        if(ch == 0xFF01 || ch == 0xFF02) return true;  
+        if(ch == 0xFF07 || ch == 0xFF0C) return true;         
+        if(ch == 0xFF1A || ch == 0xFF1B) return true;  
+        if(ch == 0xFF1F || ch == 0xFF61) return true;   
+        if(ch == 0xFF0E) return true;  
+        if(ch == 0xFF65) return true;   
+
+        return false;  
+      }  
+  static boolean isEnPunc(char ch){  
+      if (0x21 <= ch && ch <= 0x22) return true;  
+    if (ch == 0x27 || ch == 0x2C) return true;  
+    if (ch == 0x2E || ch == 0x3A) return true;  
+    if (ch == 0x3B || ch == 0x3F) return true;  
+
+    return false;  
+  }  
+  static boolean isCjkPunc(char ch){  
+        if (0x3001 <= ch && ch <= 0x3003) return true;  
+        if (0x301D <= ch && ch <= 0x301F) return true;  
+        return false;  
+      }
+	
+  /**
+   * 文本对齐
+   *
+   * 根据统计经验，用户在手机上阅读英文新闻的时候，
+   * 一行最多显示32个字节（1个中文占2个字节）时最适合用户阅读。
+   * 给定一段字符串，重新排版，使得每行恰好有32个字节，并输出至控制台
+   * 首行缩进4个字节，其余行数左对齐，每个短句不超过32个字节，
+   * 每行最后一个有效字符必须为标点符号
+   *
+   * 示例：
+   * 
+   * String：给定一段字符串，重新排版，使得每行恰好有32个字符，并输出至控制台首行缩进，其余行数左对齐，每个短句不超过32个字符。
+   * 
+   * 控制台输出:    
+   *     给定一段字符串，重新排版，  
+   * 使得每行恰好有32个字符，
+   * 并输出至控制台首行缩进，         
+   * 其余行数左对齐，
+   * 每个短句不超过32个字符。
+   * 
+   */
+  
+    public void  textExtraction(String data){
+    	System.out.print("    ");
+    	int count=4;
+    	int start=0;
+    	int puIndex=0;
+    	int j=0;
+    	for(int i=0;i<data.length();i++){
+    		if(isPunctuation(data.charAt(i))){
+    			puIndex=i;
+    		}
+    		if(data.substring(i,i+1).getBytes().length==1)
+    			count+=1;
+    		else
+    			count+=2;
+    		if(count>=32){
+				count=0;
+				System.out.println(data.substring(start,puIndex+1));
+				start=puIndex+1;
+				for(j=start;j<=i;j++){
+					if(data.substring(i,i+1).getBytes().length==1)
+		    			count+=1;
+		    		else
+		    			count+=2;
+				}
+			}
+    	}
+    	if(start!=data.length()+1)
+    		System.out.println(data.substring(start,data.length()));
+    }
+    
 
 	/**
 	 * 文本对齐
