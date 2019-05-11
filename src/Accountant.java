@@ -1,3 +1,7 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.text.DecimalFormat;
 
 public class Accountant extends Worker {
 	public String password;
@@ -8,7 +12,8 @@ public class Accountant extends Worker {
 	
 	//初始化Accountant
 	public Accountant(String name, int age, int salary, String password) {
-
+		super(name, age, salary, "Accountant");
+		this.password = password;
 	}
 	
     /**
@@ -31,10 +36,28 @@ public class Accountant extends Worker {
      * @param number
      */
     public  String numberToWords (String number){
-		return password;
+		Pattern pattern = Pattern.compile("[0-9]*");
+		String[] smallNumbers = new String[]{"",  "One",  "Two",  "Three",  "Four",  "Five",
+				"Six",  "Seven",  "Eight",  "Nine",  "Ten",
+				"Eleven",  "Twelve",  "Thirteen",  "Fourteen",  "Fifteen",
+				"Sixteen",  "Seventeen",  "Eighteen",  "Nineteen"};
+		String[] tensNumbers = new String[]{ "",  "",  "Twenty",  "Thirty",  "Forty",  "Fifty",  "Sixty",  "Seventy",  "Eighty", "Ninety"};
+		String[] scaleNumers = new String[]{"", "Hundred","Thousand", "Million", "Billion" };
+
+		if(pattern.matcher(number).matches() && number.length()<=32){
+			//password = transferMoneyToWord(number);
+
+		}
+    	else {
+    		password = "illegal";
+		}
+
+		return password.trim();
 
     }
-    
+
+
+
     /**
      * 检验密码
      * 由于会计身份的特殊性，对会计的密码安全有较高的要求，
