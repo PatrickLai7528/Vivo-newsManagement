@@ -32,6 +32,7 @@ public class ProgrammerTest {
 	@Test(timeout=4000)
 	public void test4() {
 		Programmer p = new Programmer("p",21,8000,"Java","UI");
+		System.out.println(p.hideUserinfo("Qm@Qq.com"));
 		assertEquals("q*****m@qq.com",p.hideUserinfo("Qm@Qq.com"));
 	}
 	

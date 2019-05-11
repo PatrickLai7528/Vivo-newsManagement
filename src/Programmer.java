@@ -34,7 +34,7 @@ public class Programmer extends Worker {
 	}
 
 	// 按照规则计算当月的奖金
-	public String getBonus(int overtime){
+	public String getBonus(int overtime) {
 		switch (this.type) {
 		case "Develop":
 			return this.getBonus(overtime, 100, 500, 0.2);
@@ -43,20 +43,17 @@ public class Programmer extends Worker {
 		case "UI":
 			return this.getBonus(overtime, 50, 300, 0.25);
 		default:
-			throw new Exception();
+			throw new IllegalStateException();
 		}
 	}
 
 	private String getBonus(int overtime, int bonusPerEach, int max,
 			double radio) {
-		if(overtime > max) throw new IllegalArgumentException("Overtime illegal!");
+		if (overtime < 0 || overtime > max)
+			throw new IllegalArgumentException("Overtime illegal!");
 		int overBonus = Math.min(overtime * bonusPerEach, max);
 		double salary = this.salary * radio;
 		DecimalFormat df = new DecimalFormat("0,000.00");
-//		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-//		symbols.setDecimalSeparator(',');
-//		symbols.setGroupingSeparator(' ');
-//		df.setDecimalFormatSymbols(symbols);
 		return df.format(overBonus + salary);
 	}
 
@@ -117,17 +114,20 @@ public class Programmer extends Worker {
 		String[] spilted = email.split("@");
 
 		// @前 的長度必須大於 @後 的長度
-		if (spilted[0].length() <= 2
-				|| spilted[0].length() <= spilted[1].length())
+		if (spilted[0].length() <= 1
+				|| spilted[1].length() < spilted[0].length())
 			return "illegal";
 
-		String pattern1 = "/[A-Z]|[a-z]|[0-9]+/g";
-		if (!Pattern.matches(pattern1, spilted[0]))
+		String pattern1 = "([A-Z]*|[a-z]*|[0-9]*)*";
+		if (!Pattern.matches(pattern1, spilted[0])) {
 			return "illegal";
+		}
 
-		String pattern2 = "/([A-Z]\\.|[a-z]\\.)*([A-Z]|[a-z]*){1}/g";
-		if (!Pattern.matches(pattern2, email))
+		System.out.println(spilted[0] + " " + spilted[1]);
+		String pattern2 = "(([A-Z]|[a-z])+\\.)*(([A-Z]|[a-z])*)";
+		if (!Pattern.matches(pattern2, spilted[1])) {
 			return "illegal";
+		}
 
 		// 轉換成小寫
 		spilted[0] = spilted[0].toLowerCase();
@@ -140,6 +140,8 @@ public class Programmer extends Worker {
 	}
 
 	private String hideUserPhone(String phone) {
+		phone = phone.trim().replace(",", "").replace("(", "").replace(")", "")
+				.replace("-", "");
 		if (phone.length() > 10) {
 			String stars = "";
 			for (int i = 10; i < phone.length(); i++) {
