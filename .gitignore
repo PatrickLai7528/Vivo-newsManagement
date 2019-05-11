@@ -53,3 +53,12 @@ sonar-project.properties
 src.backup/Editor.java
 src.backup/Manager.java
 src.backup/Worker.java
+bin/Editor.class
+bin/Worker.class
+src/Editor.java
+src/Worker.java
+bin/Editor.class
+bin/Worker.class
+src/Editor.java
+src/Worker.java
+

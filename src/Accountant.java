@@ -1,3 +1,4 @@
+import java.util.regex.*;
 
 public class Accountant extends Worker {
 	public String password;
@@ -8,7 +9,8 @@ public class Accountant extends Worker {
 	
 	//初始化Accountant
 	public Accountant(String name, int age, int salary, String password) {
-
+		super(name,age,salary,"Accountant");
+		this.password=password;
 	}
 	
     /**
@@ -56,7 +58,47 @@ public class Accountant extends Worker {
      * @param password
      */
     public  int checkPassword(){
-		return 0;
-
+    	int count=0;
+    	int len=password.length();
+    	if(len<8){
+    		count=count+8-len;
+    	}
+    	else if(len>20){
+    		count=count+len-20;
+    	}
+    	else{
+    		Pattern r1 = Pattern.compile("[a-z]");
+    		Matcher m1 = r1.matcher(password);
+    		Pattern r2 = Pattern.compile("[A-Z]");
+    		Matcher m2 = r2.matcher(password);
+    		Pattern r3 = Pattern.compile("[0-9]");
+    		Matcher m3 = r3.matcher(password);
+    		if(m1.find()==false){
+    			count++;
+    		}
+    		if(m2.find()==false){
+    			count++;
+    		}
+    		if(m3.find()==false){
+    			count++;
+    		}
+    		for(int i=0;i<len;i++){
+    			if((password.charAt(i)>='a' && password.charAt(i)<='z') || (password.charAt(i)>='A' && password.charAt(i)<='Z') || ((password.charAt(i)>='0' && password.charAt(i)<='9'))){
+    				;
+    			}
+    			else{
+    				count++;
+    			}
+    		}
+    		for(int i=0;i<len-2;i++){
+    			if(password.charAt(i)==password.charAt(i+1) &&password.charAt(i+1)==password.charAt(i+2)){
+    				count++;
+    				i+=2;
+    			}
+    		}
+    	}
+		return count;
+		
     }
+    
 }
