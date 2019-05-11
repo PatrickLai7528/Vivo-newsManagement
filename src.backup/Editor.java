@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Editor extends Worker {
 
@@ -64,8 +66,36 @@ public class Editor extends Worker {
 	 * @param newsContent
 	 */
 	public String findHotWords(String newsContent) {
-		return newsContent;
+		newsContent = newsContent.replaceAll("[\\pP‘’“”]", "");
+		Map<String, Integer> map = new HashMap<>();
+		int max = 0;
+		String res = "";
+		for (int i = 0; i < newsContent.length(); i++) {
+			for (int j = 2; j < 10; j++) {
+				if (i + j >= newsContent.length())
+					continue;
+				String currentWord = newsContent.substring(i, i + j);
+				if (map.containsKey(currentWord)) {
+					map.put(currentWord, map.get(currentWord) + 1);
+				} else {
+					map.put(currentWord, 1);
+				}
+				if (map.get(currentWord) > max) {
+					max = map.get(currentWord);
+					res = currentWord;
+				}
+				// System.out.println(currentWord);
+			}
+		}
+		return res;
 
+	}
+
+	public static void main(String[] args) {
+		Editor editor = new Editor();
+		String res = editor
+				.findHotWords("今天的中国，呈现给世界的不仅有波澜壮阔的改革发展图景，更有一以贯之的平安祥和稳定。这平安祥和稳定的背后，凝聚着中国治国理政的卓越智慧，也凝结着中国公安民警的辛勤奉献");
+		System.out.println(res);
 	}
 
 	/**
