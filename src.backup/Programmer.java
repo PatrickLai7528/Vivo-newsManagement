@@ -34,7 +34,7 @@ public class Programmer extends Worker {
 	}
 
 	// 按照规则计算当月的奖金
-	public String getBonus(int overtime) throws Exception {
+	public String getBonus(int overtime){
 		switch (this.type) {
 		case "Develop":
 			return this.getBonus(overtime, 100, 500, 0.2);
