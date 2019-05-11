@@ -12,17 +12,18 @@ public class ProgrammerTest {
 	@Test(timeout=4000)
 	public void test1() {
 		Programmer p = new Programmer("p",21,8000,"Java","UI");
+		System.out.println(p.show());
 		assertEquals("My name is p ; age : 21 ; language : Java ; salary : 8000.",p.show());
 	}
 	
 	@Test(timeout=4000)
-	public void test2() {
+	public void test2() throws Exception {
 		Programmer p = new Programmer("p",21,8000,"Java","UI");
 		assertEquals("2,250.00",p.getBonus(5));
 	}
 
 	@Test(timeout=4000)
-	public void test3() {
+	public void test3() throws Exception {
 		Programmer p = new Programmer("p",21,8000,"Java","UI");
 		thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Overtime illegal!");

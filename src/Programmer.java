@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 
 public class Programmer extends Worker {
 	public String language;
@@ -9,6 +10,10 @@ public class Programmer extends Worker {
 	// Programmer类的初始化
 	public Programmer(String name, int age, int salary, String language,
 			String type) {
+		super(name, age, salary, "Programmer");
+		this.language = language;
+		this.age = age;
+		this.type = type;
 	}
 
 	public String getLanguage() {
@@ -28,15 +33,34 @@ public class Programmer extends Worker {
 	}
 
 	// 按照规则计算当月的奖金
-	public String getBonus(int overtime) {
-		return null;
+	public String getBonus(int overtime) throws Exception {
+		switch (this.type) {
+		case "Develop":
+			return this.getBonus(overtime, 100, 500, 0.2);
+		case "Test":
+			return this.getBonus(overtime, 150, 1000, 0.15);
+		case "UI":
+			return this.getBonus(overtime, 50, 300, 0.25);
+		default:
+			throw new Exception();
+		}
+	}
+
+	private String getBonus(int overtime, int bonusPerEach, int max,
+			double radio) {
+		int overBonus = Math.min(overtime * bonusPerEach, max);
+		double salary = this.salary * radio;
+		DecimalFormat df = new DecimalFormat("0.00");
+		return df.format(overBonus + salary);
 	}
 
 	// 展示基本信息
 	public String show() {
-		return null;
+		String resString = "My name is " + this.name + " ; age : " + this.age
+				+ " ; language : " + this.language + " ; salary : "
+				+ this.salary + ".";
+		return resString;
 	}
-
 
 	/**
 	 * 信息隐藏
@@ -61,16 +85,15 @@ public class Programmer extends Worker {
 	 * 国际号码是可选的。我们只暴露最后 4 个数字并隐藏所有其他数字。 本地号码有格式，并且如 "***-***-1111" 这样显示，
 	 * 为了隐藏有国际号码的电话号码，像 "+111 111 111 1111"，我们以 "+***-***-***-1111"
 	 * 的格式来显示。在本地号码前面的 '+' 号 和第一个 '-' 号仅当电话号码中包含国际号码时存在。 例如，一个 12 位的电话号码应当以
-	 * "+**-" 开头进行显示。 注意：像 "("，")"，" " 这样的不相干的字符以及不符合上述格式的额外的减号或者加号都应当被删除。 
-	 * 示例1:
+	 * "+**-" 开头进行显示。 注意：像 "("，")"，" " 这样的不相干的字符以及不符合上述格式的额外的减号或者加号都应当被删除。 示例1:
 	 * 
-	 * comment: "1(234)567-890" 
+	 * comment: "1(234)567-890"
 	 * 
-	 * return: "***-***-7890" 
+	 * return: "***-***-7890"
 	 * 
-	 * 示例2: 
+	 * 示例2:
 	 * 
-	 * comment: "86-(10)12345678" 
+	 * comment: "86-(10)12345678"
 	 * 
 	 * return: "+**-***-***-5678"
 	 * 

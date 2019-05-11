@@ -15,6 +15,7 @@ public class Manager extends Worker {
 
 	// 管理人员可以查询本部门员工的基本信息，跨部门查询提示权限不足，提示“Access Denied!”
 	public String inquire(Worker e) {
+		
 		return null;
 	}
 
