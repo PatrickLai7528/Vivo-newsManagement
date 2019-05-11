@@ -1,0 +1,8 @@
+
+.classpath
+bin/Manager.class
+bin/Worker.class
+src/Manager.java
+src/Worker.java
+*.class
+bin/Manager.class

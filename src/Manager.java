@@ -25,7 +25,11 @@ public class Manager extends Worker {
 
 	// 打印自己队伍的人员姓名，没有打印“Empty”
 	public String print() {
-		return null;
+		for(Worker worker: this.worker){
+			
+		}
+		return super.show();
+		worker.add(e);
 	}
 
 }
