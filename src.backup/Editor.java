@@ -91,13 +91,6 @@ public class Editor extends Worker {
 
 	}
 
-	public static void main(String[] args) {
-		Editor editor = new Editor();
-		String res = editor
-				.findHotWords("今天的中国，呈现给世界的不仅有波澜壮阔的改革发展图景，更有一以贯之的平安祥和稳定。这平安祥和稳定的背后，凝聚着中国治国理政的卓越智慧，也凝结着中国公安民警的辛勤奉献");
-		System.out.println(res);
-	}
-
 	/**
 	 *
 	 * 相似度对比
